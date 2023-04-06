@@ -16,7 +16,7 @@ const UserSchema = new Schema({
         validate: {
             validator: async function (value) {
                 let exists = await mongoose.models.User.findOne({ email: value })
-                if(exists){
+                if (exists) {
                     return false
                 }
             },
@@ -25,7 +25,14 @@ const UserSchema = new Schema({
     },
     role: {
         type: String,
-        enum: [SELLER, BUYER]
+        enum: [SELLER, BUYER],
+        set: function (value) {
+            return value.toLowerCase()
+        }
+    },
+    password: {
+        type: String,
+        required: true
     }
 });
 
