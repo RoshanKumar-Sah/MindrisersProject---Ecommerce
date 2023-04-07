@@ -18,17 +18,18 @@ const ProductSchema = new Schema({
     description: {
         type: String
     },
-    images:{
-        type:[String] //store path of our images
+    images: {
+        type: [String] //store path of our images
     },
-    categories:{
-        type: String
+    categories: {
+        type: [String]
     },
-    brands:{
-        type: String
+    brands: {
+        type: [String]
     },
-    created_by:{
-        type: ObjectId //reference document : this is reference to the id of User collection
+    created_by: {
+        type: ObjectId, //reference document : this is reference to the id of User collection
+        required: true
     }
 });
 

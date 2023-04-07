@@ -3,7 +3,7 @@ const express = require("express")
 const app = express()
 const bcrypt = require('bcrypt');
 const User = require("../model/User")
-
+const jwt = require('jsonwebtoken');
 
 app.use(express.json())
 
@@ -34,9 +34,13 @@ const login = async (req,res,next)=>{
    if(user){
     let status = await bcrypt.compare(req.body.password, user.password);
     if(status){
+
+        
+
         let obj = {...user.toObject()}
         delete obj.password
-       return res.send({"data": obj})
+        let token = jwt.sign(obj, process.env.JWT_SECRET);
+       return res.send({"data": obj, token})
     }
    }
   

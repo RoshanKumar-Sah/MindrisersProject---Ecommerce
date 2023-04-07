@@ -5,10 +5,16 @@ const app = express()
 require("./config/database")
 
 const auth_route = require("./route/auth")
+const product_route = require("./route/product")
+
+
 
 app.use(express.json())
 
+require('dotenv').config()
+
 app.use("/api", auth_route)
+app.use("/api", product_route)
 
 
 
